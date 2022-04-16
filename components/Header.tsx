@@ -4,10 +4,12 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import accountLogo from '../assets/account.png'
 import netflixLogo from '../assets/netflix-logo.svg'
+import useAuth from '../hooks/useAuth'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-
+  const { logout } = useAuth()
+  
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 0
@@ -29,7 +31,7 @@ const Header = () => {
           alt="Netflix Logo"
           width={100}
           height={100}
-          className="cursor-pointer object-contain"
+          className="object-contain cursor-pointer"
         />
 
         <ul className="hidden space-x-4 md:flex ">
@@ -42,16 +44,17 @@ const Header = () => {
       </div>
       {/* Right */}
       <div className="flex items-center space-x-4 text-sm font-light">
-        <SearchIcon className="hidden h-6 w-6 sm:inline" />
+        <SearchIcon className="hidden w-6 h-6 sm:inline" />
         <p className="hidden lg:inline">Kids</p>
-        <BellIcon className="h-6 w-6" />
-        <Link href="/account">
-          <Image
+        <BellIcon className="w-6 h-6" />
+        {/* <Link href="/account"> */}
+        <Image
+          onClick={logout}
             src={accountLogo}
             alt="account profile"
-            className="cursor-pointer rounded"
+            className="rounded cursor-pointer"
           />
-        </Link>
+        {/* </Link> */}
       </div>
     </header>
   )

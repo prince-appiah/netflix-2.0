@@ -4,6 +4,10 @@ import Banner from '../components/Banner'
 import PageMeta from '../shared/PageMeta'
 import requests from '../shared/requests'
 import { Movie } from '../typings'
+import useAuth from '../hooks/useAuth'
+import { useRecoilValue } from 'recoil'
+import { modalState, movieState } from '../atoms/modalAtom'
+import Modal from '../components/Modal'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -26,6 +30,14 @@ const Home = ({
   topRated,
   trendingNow,
 }: Props) => {
+  const { logout, loading } = useAuth()
+  const showModal = useRecoilValue(modalState)
+  const movie = useRecoilValue(movieState)
+
+  if (loading) {
+    return 'loading...'
+  }
+
   return (
     <div className="relative h-screen bg-gradient-to-b   lg:h-[140vh]">
       <PageMeta />
@@ -49,6 +61,7 @@ const Home = ({
       </main>
 
       {/* Modal */}
+      {showModal && <Modal />}
     </div>
   )
 }
