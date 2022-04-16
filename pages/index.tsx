@@ -1,6 +1,6 @@
 import Header from '../components/Header'
 import Row from '../components/Row'
-import Banner from '../shared/Banner'
+import Banner from '../components/Banner'
 import PageMeta from '../shared/PageMeta'
 import requests from '../shared/requests'
 import { Movie } from '../typings'
